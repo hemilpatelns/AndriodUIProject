@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/linearProgressTextOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Earned"
+        app:layout_constraintEnd_toStartOf="@+id/linearProgressTextTwo"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/linearProgressTextTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="WTD. GWP"
+        app:layout_constraintEnd_toStartOf="@+id/linearProgressTextThree"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/linearProgressTextOne"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/linearProgressTextThree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Target"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/linearProgressTextTwo"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/linearProgressBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="5dp"
+        app:layout_constraintEnd_toEndOf="@id/linearProgressTextThree"
+        app:layout_constraintStart_toStartOf="@+id/linearProgressTextOne"
+        app:layout_constraintTop_toBottomOf="@id/linearProgressTextThree"
+        app:trackThickness="10dp"
+        app:trackCornerRadius="5dp"
+        android:max="100"
+        android:progress="25"
+        app:indicatorTrackGapSize="0dp"
+        app:indicatorColor="@color/progressGreen"
+        app:trackColor="@color/dottedLine"/>
+
+    <TextView
+        android:id="@+id/linearEarned"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/linearProgressBar"
+        app:layout_constraintTop_toBottomOf="@id/linearProgressBar"
+        android:text="50,000"
+        android:textSize="20sp"
+        android:textColor="@color/progressGreen"/>
+    <TextView
+        android:id="@+id/linearTarget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/linearProgressBar"
+        app:layout_constraintTop_toBottomOf="@id/linearProgressBar"
+        android:text="2Cr"
+        android:textSize="20sp"
+        android:textColor="@color/primaryBlue"/>
+    
+    <TextView
+        android:id="@+id/goalDifference"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:drawableEndCompat="@drawable/ic_info"
+        android:drawablePadding="5dp"
+        app:layout_constraintTop_toBottomOf="@id/linearTarget"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="1.95cr away from Diamond club"
+        android:paddingTop="10dp"/>
+
+    <TextView
+        android:id="@+id/upcomingSlabTarget"
+        style="@style/BSCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1.5L"
+        android:textSize="40sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/goalDifference" />
+
+    <Button
+        android:id="@+id/viewProgressButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" View Incentive Details"
+        app:layout_constraintTop_toBottomOf="@id/upcomingSlabTarget"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="10dp"
+        android:backgroundTint="#055CA8" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

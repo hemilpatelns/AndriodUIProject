@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/itemKnowledgeCentre"
+        android:icon="@drawable/ic_knowledge_centre"
+        android:title="Knowledge Centre"/>
+    <item
+        android:id="@+id/itemServicing"
+        android:icon="@drawable/ic_knowledge_centre"
+        android:title="Servicing"/>
+    <item
+        android:id="@+id/itemRenewals"
+        android:icon="@drawable/ic_knowledge_centre"
+        android:title="Renewals"/>
+    <item
+        android:id="@+id/itemQuickQuote"
+        android:icon="@drawable/ic_knowledge_centre"
+        android:title="Quick Quote"/>
+    <item
+        android:id="@+id/itemBusinessReports"
+        android:icon="@drawable/ic_business_reports"
+        android:title=" Business Reports"/>
+    <item
+        android:id="@+id/itemGiantSteps"
+        android:icon="@drawable/ic_giant_steps"
+        android:title="Giant Steps"/>
+    <item
+        android:id="@+id/itemCampaigns"
+        android:icon="@drawable/ic_campaigns"
+        android:title="Campaigns"/>
+    <item
+        android:id="@+id/itemCommissions"
+        android:icon="@drawable/ic_giant_steps"
+        android:title="Commissions"/>
+    <item
+        android:id="@+id/itemLocators"
+        android:icon="@drawable/ic_locators"
+        android:title="Locators"/>
+    <item
+        android:id="@+id/itemHelp"
+        android:icon="@drawable/ic_help"
+        android:title="Help"/>
+</menu>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="iconBackground">#88DEEC</color>
+    <color name="red">#FF0000</color>
+    <color name="dottedLine">#C8C6C6</color>
+    <color name="primaryBlue">#071E54</color>
+    <color name="progressGreen">#2bb445</color>
+</resources>

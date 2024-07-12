@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- activity_main.xml -->
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/mainContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Your initial TextViews -->
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Knowledge Centre"
+            android:drawablePadding="8dp"
+            android:paddingVertical="16dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="50dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:focusable="true"
+            app:drawableEndCompat="@drawable/ic_down"
+            app:drawableStartCompat="@drawable/ic_knowledge_centre" />
+
+        <!-- Initially hidden sub list container -->
+        <LinearLayout
+            android:id="@+id/subListContainer1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
+            <!-- Sublist TextViews will be added here programmatically -->
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Servicing"
+            android:drawablePadding="8dp"
+            android:paddingVertical="16dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="50dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:focusable="true"
+            app:drawableEndCompat="@drawable/ic_down"
+            app:drawableStartCompat="@drawable/ic_knowledge_centre" />
+
+        <!-- Initially hidden sub list container -->
+        <LinearLayout
+            android:id="@+id/subListContainer2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
+            <!-- Sublist TextViews will be added here programmatically -->
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Renewals"
+            android:drawablePadding="8dp"
+            android:paddingVertical="16dp"
+            android:paddingHorizontal="20dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:focusable="true"
+            app:drawableStartCompat="@drawable/ic_knowledge_centre"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Quick Quote"
+            android:drawablePadding="8dp"
+            android:paddingVertical="16dp"
+            android:paddingHorizontal="20dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:focusable="true"
+            app:drawableStartCompat="@drawable/ic_knowledge_centre"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Business Reports"
+            android:drawablePadding="8dp"
+            android:paddingVertical="16dp"
+            android:paddingHorizontal="20dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:focusable="true"
+            app:drawableStartCompat="@drawable/ic_business_reports"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Giant Steps"
+            android:drawablePadding="8dp"
+            android:paddingVertical="16dp"
+            android:paddingHorizontal="20dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:focusable="true"
+            app:drawableStartCompat="@drawable/ic_giant_steps"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Campaigns"
+            android:drawablePadding="8dp"
+            android:paddingVertical="16dp"
+            android:paddingHorizontal="20dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:focusable="true"
+            app:drawableStartCompat="@drawable/ic_campaigns"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Commissions"
+            android:drawablePadding="8dp"
+            android:paddingVertical="16dp"
+            android:paddingHorizontal="20dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:focusable="true"
+            app:drawableStartCompat="@drawable/ic_giant_steps"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Locators"
+            android:drawablePadding="8dp"
+            android:paddingVertical="16dp"
+            android:paddingHorizontal="20dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:focusable="true"
+            app:drawableStartCompat="@drawable/ic_locators"/>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Help"
+            android:drawablePadding="8dp"
+            android:paddingVertical="16dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="50dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:focusable="true"
+            app:drawableEndCompat="@drawable/ic_down"
+            app:drawableStartCompat="@drawable/ic_help" />
+
+        <!-- Initially hidden sub list container -->
+        <LinearLayout
+            android:id="@+id/subListContainer3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
+            <!-- Sublist TextViews will be added here programmatically -->
+        </LinearLayout>
+
+        <!-- Add more TextViews as needed -->
+
+    </LinearLayout>
+
+</ScrollView>
