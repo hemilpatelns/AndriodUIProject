@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linearProgressBarCon"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -9,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Earned"
+        style="@style/smallText"
         app:layout_constraintEnd_toStartOf="@+id/linearProgressTextTwo"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -20,6 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="WTD. GWP"
+        style="@style/smallText"
         app:layout_constraintEnd_toStartOf="@+id/linearProgressTextThree"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/linearProgressTextOne"
@@ -30,6 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Target"
+        style="@style/smallText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/linearProgressTextTwo"
@@ -79,8 +83,9 @@
         app:layout_constraintTop_toBottomOf="@id/linearTarget"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="1.95cr away from Diamond club"
-        android:paddingTop="10dp"/>
+        android:text="1.95cr Away From Diamond Club"
+        style="@style/smallText"
+        android:paddingTop="15dp"/>
 
     <TextView
         android:id="@+id/upcomingSlabTarget"
@@ -88,7 +93,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="1.5L"
-        android:textSize="40sp"
+        android:textSize="38sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/goalDifference" />
@@ -103,7 +108,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="10dp"
         android:backgroundTint="#055CA8" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

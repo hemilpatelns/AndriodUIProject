@@ -4,7 +4,11 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="20dp"
-    app:cardElevation="0dp">
+    app:cardUseCompatPadding="true"
+    app:cardElevation="0dp"
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackgroundBorderless"
+    android:focusable="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
@@ -49,7 +53,9 @@
             android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/appCompatButton"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/productTextTwo" />
+            app:layout_constraintTop_toBottomOf="@+id/productTextTwo"
+            style="@style/smallText"
+            android:fontFamily="@font/poppins_regular"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/appCompatButton"
@@ -58,6 +64,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/button_border"
             android:text="Button"
+            style="@style/smallText"
             android:textAllCaps="false"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -65,6 +72,7 @@
             app:layout_constraintTop_toBottomOf="@+id/productTextThree" />
 
         <ImageView
+            android:id="@+id/productImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_insurance"

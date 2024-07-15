@@ -10,17 +10,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Earned Premium"
-        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/targetAndEarnedSmall"/>
 
     <TextView
         android:id="@+id/earnedValue"
-        style="@style/ProgressCard"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="₹12.5L"
         android:textSize="37sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/earnedLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/earnedLabel"
+        style="@style/ProgressCard" />
 </androidx.constraintlayout.widget.ConstraintLayout>

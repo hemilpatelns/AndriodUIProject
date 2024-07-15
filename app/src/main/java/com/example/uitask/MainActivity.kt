@@ -1,48 +1,62 @@
 package com.example.uitask
 
-import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
-import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.PopupWindow
 import android.widget.ScrollView
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.TooltipCompat
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
-import androidx.core.view.get
 import androidx.core.view.isVisible
-import androidx.core.view.marginStart
-import androidx.core.view.marginTop
+import androidx.core.view.marginEnd
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.example.uitask.databinding.ActivityMainBinding
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.progressindicator.LinearProgressIndicator
 
+
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var tooltipFrameLayout: FrameLayout
+
+    private val binding: ActivityMainBinding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
+
     private lateinit var toolBar: MaterialToolbar
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
 
     private lateinit var mainContainer: LinearLayout
     private lateinit var scrollView: ScrollView
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: ProductCardAdapter
+    private lateinit var dataList: List<MyDataModel>
     private val sublistMap = mutableMapOf<Int, List<String>>()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
 
         toolBar = findViewById(R.id.toolBar)
         setSupportActionBar(toolBar)
@@ -50,13 +64,21 @@ class MainActivity : AppCompatActivity() {
         mainContainer = findViewById(R.id.mainContainer)
         scrollView = findViewById(R.id.listOptions)
 
+        productCardDetails()
+        motorCardDetails()
+
         sublistMap[R.id.textView1] = listOf("Products", "Engagement", "Agency Connect")
         sublistMap[R.id.textView2] = listOf("Claims", "Endorsements")
         sublistMap[R.id.textView3] = listOf("Contact RM", "FAQs", "Raise a concern")
 
-        // closing the drawer
+        // Closing the drawer
         findViewById<ShapeableImageView>(R.id.closeDrawer).setOnClickListener {
             drawerLayout.closeDrawer(GravityCompat.START)
+        }
+
+        // Tool Tip on click event
+        binding.giantStepsLabel.headerInfo.setOnClickListener {
+            showTooltip(it)
         }
 
         findViewById<TextView>(R.id.textView1).setOnClickListener {
@@ -98,6 +120,26 @@ class MainActivity : AppCompatActivity() {
         changeValues()
     }
 
+    //   Function to show tooltip
+    private fun showTooltip(anchorView: View) {
+        // Inflate the custom tooltip layout
+        val inflater = getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val tooltipView = inflater.inflate(R.layout.item_tooltip, null)
+
+
+        val popupWindow = PopupWindow(
+            tooltipView,
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+
+        // Show the popup window
+        popupWindow.isOutsideTouchable = true
+        popupWindow.isFocusable = true
+        val xOffSet = -80
+        val yOffSet = 0
+        popupWindow.showAsDropDown(anchorView, xOffSet, yOffSet)
+    }
 
     private fun toggleSublistVisibility(
         clickedTextView: TextView,
@@ -123,7 +165,7 @@ class MainActivity : AppCompatActivity() {
                 sublistContainer.animate()
                     .translationY(-sublistContainer.height.toFloat())
                     .alpha(0f)
-                    .setDuration(300)
+                    .setDuration(500)
                     .setInterpolator(AccelerateDecelerateInterpolator())
                     .withEndAction {
                         sublistContainer.visibility = View.GONE
@@ -139,7 +181,7 @@ class MainActivity : AppCompatActivity() {
                         R.drawable.ic_down,
                     ), null
                 )
-            } else {
+            } else if(sublistContainer.visibility == View.GONE) {
                 // Clear existing sublist items in all containers
                 clearAllSublistContainers(sublistContainer)
 
@@ -150,7 +192,6 @@ class MainActivity : AppCompatActivity() {
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT
                     )
-                    textView.textSize = 15f
                     textView.text = item
                     textView.setPadding(80, 40, 16, 40)
                     textView.setOnClickListener {
@@ -160,27 +201,27 @@ class MainActivity : AppCompatActivity() {
                 }
 
 //                sublistContainer.visibility = View.VISIBLE
-
-                sublistContainer.visibility = View.VISIBLE
                 sublistContainer.alpha = 0f
                 sublistContainer.translationY = -sublistContainer.height.toFloat()
                 sublistContainer.animate()
                     .translationY(0f)
                     .alpha(1f)
-                    .setDuration(300)
+                    .setDuration(500)
                     .setInterpolator(AccelerateDecelerateInterpolator())
                     .start()
-
+                sublistContainer.visibility = View.VISIBLE
                 // Scroll to make the sublist visible
 //                val offset = resources.getDimensionPixelOffset(R.dimen.scroll_offset)
                 scrollView.post {
-                    if(sublistContainer.isVisible){
+                    if (sublistContainer.isVisible) {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                             scrollView.scrollToDescendant(sublistContainer)
                         }
                     }
                 }
             }
+        }else{
+
         }
     }
 
@@ -209,28 +250,28 @@ class MainActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.days).visibility = View.INVISIBLE
         }
 
-        findViewById<TextView>(R.id.quickActionLabel).apply {
-            text = "QUICK ACTIONS"
-            setCompoundDrawables(null, null, null, null)
+        binding.quickActionLabel.apply {
+            headerText.text = "Quick Actions"
+            headerInfo.visibility = View.GONE
         }
 
-        findViewById<TextView>(R.id.businessSummaryLabel).apply {
-            text = "BUSINESS SUMMARY"
-            setCompoundDrawables(null, null, null, null)
+        binding.businessSummaryLabel.apply {
+            headerText.text = "Business Summary"
+            headerInfo.visibility = View.GONE
         }
 
-        findViewById<TextView>(R.id.quickQuotesLabel).apply {
-            text = "QUICK QUOTES"
-            setCompoundDrawables(null, null, null, null)
+        binding.quickQuotesLabel.apply {
+            headerText.text = "Quick Quote"
+            headerInfo.visibility = View.GONE
         }
 
-        findViewById<TextView>(R.id.giantStepsLabel).apply {
-            text = "GIANT STEPS"
+        binding.giantStepsLabel.apply {
+            headerText.text = "Giant Steps"
         }
 
-        findViewById<TextView>(R.id.campaignLabel).apply {
-            text = "CAMPAIGN"
-            setCompoundDrawables(null, null, null, null)
+        binding.campaignLabel.apply {
+            headerText.text = "Campaign"
+            headerInfo.visibility = View.GONE
         }
 
         findViewById<TextView>(R.id.healthLabel).text = "Health"
@@ -328,7 +369,7 @@ class MainActivity : AppCompatActivity() {
                 findViewById<TextView>(R.id.earnedLabel).text = "Achieved\n(wtd. GWP)"
                 findViewById<TextView>(R.id.earnedValue).text = "20.5K"
             }
-            findViewById<ConstraintLayout>(R.id.clubGold).visibility = View.GONE
+            findViewById<ConstraintLayout>(R.id.clubGold).visibility = View.INVISIBLE
             findViewById<TextView>(R.id.eligibility).apply {
                 setCompoundDrawablesWithIntrinsicBounds(
                     ContextCompat.getDrawable(
@@ -337,55 +378,6 @@ class MainActivity : AppCompatActivity() {
                     ), null, null, null
                 )
                 text = "Eligible"
-            }
-            findViewById<ConstraintLayout>(R.id.linearProgressBarItem).apply {
-                findViewById<TextView>(R.id.linearProgressTextOne).visibility = View.GONE
-                findViewById<TextView>(R.id.linearProgressTextTwo).visibility = View.GONE
-                findViewById<TextView>(R.id.linearProgressTextThree).visibility = View.GONE
-                findViewById<LinearProgressIndicator>(R.id.linearProgressBar).visibility = View.GONE
-                findViewById<TextView>(R.id.linearEarned).visibility = View.GONE
-                findViewById<TextView>(R.id.linearTarget).visibility = View.GONE
-                findViewById<TextView>(R.id.goalDifference).apply {
-                    text = "Upcoming slab target (wtd. GWP)"
-                    setCompoundDrawablesWithIntrinsicBounds(
-                        null,
-                        null,
-                        ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_info),
-                        null
-                    )
-                }
-                findViewById<TextView>(R.id.upcomingSlabTarget).text = "1.5L"
-                findViewById<Button>(R.id.viewProgressButton).text = "View Campaign"
-            }
-        }
-
-        //3
-        findViewById<CardView>(R.id.campaignMotor).apply {
-            findViewById<TextView>(R.id.yearlyDuration).text = "Quarterly\n02 May - 02 Aug’24"
-            findViewById<TextView>(R.id.currentDate).text = "As on 12 Jun'24"
-            findViewById<TextView>(R.id.campaignName).text = " Motor Quarterly\nCampaign"
-            findViewById<ConstraintLayout>(R.id.targetLayout).apply {
-                findViewById<TextView>(R.id.targetLabel).text = "Slab Target\n(wtd. GWP)"
-                findViewById<TextView>(R.id.targetValue).text = "75K"
-            }
-            findViewById<CircularProgressIndicator>(R.id.circularProgressIndicator).apply {
-                max = 100
-                progress = 25
-            }
-            findViewById<ImageView>(R.id.imageInsideProgressBar).setImageResource(R.drawable.ic_motor_blue)
-            findViewById<ConstraintLayout>(R.id.earnedLayout).apply {
-                findViewById<TextView>(R.id.earnedLabel).text = "Achieved\n(wtd. GWP)"
-                findViewById<TextView>(R.id.earnedValue).text = "20.5K"
-            }
-            findViewById<ConstraintLayout>(R.id.clubGold).visibility = View.GONE
-            findViewById<TextView>(R.id.eligibility).apply {
-                setCompoundDrawablesWithIntrinsicBounds(
-                    ContextCompat.getDrawable(
-                        this@MainActivity,
-                        R.drawable.ic_not_eligible
-                    ), null, null, null
-                )
-                text = "Not Eligible"
             }
             findViewById<ConstraintLayout>(R.id.linearProgressBarItem).apply {
                 findViewById<TextView>(R.id.linearProgressTextOne).visibility = View.GONE
@@ -426,7 +418,7 @@ class MainActivity : AppCompatActivity() {
                 findViewById<TextView>(R.id.earnedLabel).text = "Achieved\n(wtd. GWP)"
                 findViewById<TextView>(R.id.earnedValue).text = "20.5K"
             }
-            findViewById<ConstraintLayout>(R.id.clubGold).visibility = View.GONE
+            findViewById<ConstraintLayout>(R.id.clubGold).visibility = View.INVISIBLE
             findViewById<TextView>(R.id.eligibility).apply {
                 setCompoundDrawablesWithIntrinsicBounds(
                     ContextCompat.getDrawable(
@@ -505,5 +497,118 @@ class MainActivity : AppCompatActivity() {
                 findViewById<Button>(R.id.viewProgressButton).text = "View Campaign"
             }
         }
+    }
+
+    private fun productCardDetails() {
+        dataList = listOf(
+            MyDataModel(
+                R.drawable.ic_insurance,
+                "Product 1",
+                "Copy up to three\nwill come\nhere",
+                "Lorem ipsem upto 2\nlines",
+                "Know More"
+            ),
+            MyDataModel(
+                R.drawable.ic_insurance,
+                "Product 2",
+                "Copy up to three\nwill come\nhere",
+                "Lorem ipsem upto 2\nlines",
+                "Know More"
+            ),
+            MyDataModel(
+                R.drawable.ic_insurance,
+                "Product 3",
+                "Copy up to three\nwill come\nhere",
+                "Lorem ipsem upto 2\nlines",
+                "Know More"
+            )
+            // Add more items as needed
+        )
+
+        // Initialize RecyclerView
+        recyclerView = findViewById(R.id.insuranceCards)
+        recyclerView.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
+        // Initialize adapter
+        adapter = ProductCardAdapter(dataList)
+        recyclerView.adapter = adapter
+    }
+
+    private fun motorCardDetails() {
+        val motorData = MotorData(
+            yearlyDuration = "Quarterly\n02 May - 02 Aug’24",
+            currentDate = "As on 12 Jun'24",
+            campaignName = "Motor Quarterly\nCampaign",
+            targetLabel = "Slab Target\n(wtd. GWP)",
+            targetValue = "75K",
+            R.drawable.ic_motor_blue,
+            progressMax = 100,
+            progressCurrent = 25,
+            earnedLabel = "Achieved\n(wtd. GWP)",
+            earnedValue = "20.5K",
+            eligibilityText = "Not Eligible",
+            goalDifference = "Upcoming slab target (wtd. GWP)",
+            upcomingTarget = "1.5L",
+            viewProgress = "View Motor Campaign"
+        )
+        val motorList: MutableList<MotorData> = mutableListOf()
+        for (i in 0 until 4) {
+            motorList.add(motorData)
+        }
+
+        // Dot Code
+        val dotIndicatorContainer: LinearLayout = findViewById(R.id.dotIndicatorContainer)
+
+        // Initialize number of dots based on the number of cards
+        val numCards = motorList.size  // Example: Replace with your actual number of cards
+
+        // Create an array of ImageView (dots)
+        val dots = arrayOfNulls<ImageView>(numCards)
+
+        val activeDotDrawable =
+            ContextCompat.getDrawable(this, R.drawable.ic_active_dot) // Active dot drawable
+        val inactiveDotDrawable =
+            ContextCompat.getDrawable(this, R.drawable.ic_inactive_dot) // Inactive dot drawable
+
+        // Add dots to the dotIndicatorContainer
+        for (i in 0 until numCards) {
+            dots[i] = ImageView(this)
+            dots[i]?.setImageDrawable(inactiveDotDrawable)
+            val params = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            params.setMargins(15, 0, 15, 0)
+            dots[i]?.layoutParams = params
+            dotIndicatorContainer.addView(dots[i])
+        }
+
+        // Function to update dot indicators based on current position
+        fun updateDotIndicator(position: Int) {
+            for (i in dots.indices) {
+                if (i == position) {
+                    dots[i]?.setImageDrawable(activeDotDrawable)
+                } else {
+                    dots[i]?.setImageDrawable(inactiveDotDrawable)
+                }
+            }
+        }
+
+        val recyclerViewMotor: RecyclerView = binding.recyclerViewMotor
+
+        recyclerViewMotor.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                val layoutManager = recyclerViewMotor.layoutManager as LinearLayoutManager
+                val firstVisiblePosition = layoutManager.findFirstVisibleItemPosition()
+                updateDotIndicator(firstVisiblePosition)
+            }
+        })
+
+        recyclerViewMotor.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        PagerSnapHelper().attachToRecyclerView(recyclerViewMotor)
+        val motorAdapter = MotorAdapter(motorList)
+        recyclerViewMotor.adapter = motorAdapter
     }
 }

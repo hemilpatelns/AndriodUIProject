@@ -20,12 +20,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="02 May - 02 Aug'24"
-            android:textSize="15sp"
-            android:textFontWeight="600"
-            android:paddingBottom="20dp"
+            android:paddingBottom="30dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:targetApi="p" />
+            style="@style/smallText"
+            android:fontFamily="@font/poppins_semibold"/>
 
         <LinearLayout
             android:id="@+id/totalPoliciesLayout"
@@ -41,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Total Policies"
-                android:textSize="15sp"/>
+                style="@style/smallText"/>
 
             <TextView
                 android:id="@+id/totalPolicies"
@@ -75,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Total GWP"
-                android:textSize="15sp"/>
+                style="@style/smallText"/>
 
             <TextView
                 android:id="@+id/totalGWP"

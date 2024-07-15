@@ -9,17 +9,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Target Premium"
-        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/targetAndEarnedSmall"/>
 
     <TextView
         android:id="@+id/targetValue"
-        style="@style/BSCard"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="₹1.1Cr"
         android:textSize="37sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/targetLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/targetLabel"
+        style="@style/BSCard" />
 </androidx.constraintlayout.widget.ConstraintLayout>

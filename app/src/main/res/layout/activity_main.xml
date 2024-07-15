@@ -20,9 +20,9 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="none"
+            android:layout_height="wrap_content"
             android:overScrollMode="never"
+            android:scrollbars="none"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -144,43 +144,14 @@
                     app:layout_constraintStart_toEndOf="@+id/travelIcon"
                     app:layout_constraintTop_toBottomOf="@id/quickQuotesLabel" />
 
-                <HorizontalScrollView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/insuranceCards"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:overScrollMode="never"
-                    android:scrollbars="none"
+                    android:orientation="horizontal"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/commLinesIcon">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <include
-                            android:id="@+id/productCardOne"
-                            layout="@layout/item_product_card"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="5dp"
-                            app:layout_constraintEnd_toStartOf="@+id/productCardTwo"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toStartOf="parent" />
-
-                        <include
-                            android:id="@+id/productCardTwo"
-                            layout="@layout/item_product_card"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginEnd="10dp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toEndOf="@+id/productCardOne" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </HorizontalScrollView>
+                    app:layout_constraintTop_toBottomOf="@id/commLinesIcon" />
 
                 <include
                     android:id="@+id/giantStepsLabel"
@@ -242,14 +213,26 @@
                     app:layout_constraintStart_toStartOf="@id/guidelineStart"
                     app:layout_constraintTop_toBottomOf="@id/campaignHealth" />
 
-                <include
-                    android:id="@+id/campaignMotor"
-                    layout="@layout/item_progress_card"
-                    android:layout_width="0dp"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewMotor"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
                     app:layout_constraintStart_toStartOf="@id/guidelineStart"
-                    app:layout_constraintTop_toBottomOf="@id/motorLabel" />
+                    app:layout_constraintTop_toBottomOf="@id/motorLabel">
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <LinearLayout
+                    android:id="@+id/dotIndicatorContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/recyclerViewMotor"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    />
 
                 <include
                     android:id="@+id/travelLabel"
@@ -260,7 +243,7 @@
                     app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
                     app:layout_constraintHorizontal_bias="0.08"
                     app:layout_constraintStart_toStartOf="@id/guidelineStart"
-                    app:layout_constraintTop_toBottomOf="@id/campaignMotor" />
+                    app:layout_constraintTop_toBottomOf="@id/dotIndicatorContainer" />
 
                 <include
                     android:id="@+id/campaignTravel"
@@ -290,6 +273,12 @@
                     app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
                     app:layout_constraintStart_toStartOf="@id/guidelineStart"
                     app:layout_constraintTop_toBottomOf="@id/commLinesLabel" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/campaignCommLines"/>
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guidelineStart"

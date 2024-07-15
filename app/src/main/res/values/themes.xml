@@ -3,9 +3,8 @@
     <style name="Base.Theme.UITask" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="fontFamily">@font/poppin_fonts</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
         <item name="android:includeFontPadding">false</item>
-        <item name="android:textFontWeight" tools:targetApi="p">550</item>
     </style>
 
     <style name="BSCard" parent="">
@@ -22,5 +21,18 @@
         <item name="cornerSize">50%</item>
     </style>
 
-    <style name="Theme.UITask" parent="Base.Theme.UITask" />
+<!--    Text Customization  -->
+    <style name="headerStyle" parent="">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="smallText" parent="">
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="targetAndEarnedSmall" parent="">
+        <item name="android:textSize">12sp</item>
+    </style>
 </resources>
